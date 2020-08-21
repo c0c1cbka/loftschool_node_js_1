@@ -4,7 +4,7 @@
   "description": "ДЗ №1 на курсе по NodeJS от loftschool",
   "main": "index.js",
   "scripts": {
-    "test": "start"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/c0c1cbka/study_node_js/issues"
   },
-  "homepage": "https://github.com/c0c1cbka/study_node_js#readme"
+  "homepage": "https://github.com/c0c1cbka/study_node_js#readme",
+  "dependencies": {
+    "eslint-config-standard": "^14.1.1"
+  }
 }
