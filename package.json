@@ -1,7 +1,7 @@
 {
-  "name": "dz_1",
+  "name": "dz_2",
   "version": "0.0.1",
-  "description": "ДЗ №1 на курсе по NodeJS от loftschool",
+  "description": "ДЗ №2 на курсе по NodeJS от loftschool",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/c0c1cbka/study_node_js#readme",
   "dependencies": {
-    "eslint-config-standard": "^14.1.1"
+    "eslint-config-standard": "^14.1.1",
+    "express": "^4.17.1"
   }
 }
