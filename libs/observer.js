@@ -5,9 +5,8 @@ module.exports = class {
         this.isStarted = false;
     }
 
-    start(msg){
+    start(){
         this.isStarted = true;
-        console.log(msg);
     }
 
     addObserver(observer){
