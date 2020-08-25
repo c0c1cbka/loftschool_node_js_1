@@ -11,6 +11,7 @@ if (process.argv[2] == undefined) {
 } else {
     my_folder_path = process.argv[2];
 }
+let del = process.argv[3];
 
 //Определяем путь до итоговой папки
 let my_new_folder_path;
@@ -24,8 +25,10 @@ myFolder.getFilesInFolder(my_folder_path,(files)=>{
     console.log('я всё прочёл');
     myFolder.systematizationCopyFiles(my_new_folder_path,files,()=>{
         console.log('я всё скопировал');
-        myFolder.deleteFolderAndFiles(my_folder_path,()=>{
-            console.log('я всё удалил');
-        });
+        if(del){
+            myFolder.deleteFolderAndFiles(my_folder_path,()=>{
+                console.log('я всё удалил');
+            });   
+        }
     });
 });
