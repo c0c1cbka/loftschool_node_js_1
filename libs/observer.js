@@ -21,6 +21,7 @@ module.exports = class {
 
     isComplited(){
         if(this.isStarted && this.observers.length == 0){
+            this.isStarted = false;
             this.callback();
         }
     }

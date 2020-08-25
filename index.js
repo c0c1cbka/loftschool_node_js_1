@@ -21,7 +21,11 @@ if (process.argv[3] == undefined) {
 }
 
 myFolder.getFilesInFolder(my_folder_path,(files)=>{
+    console.log('я всё прочёл');
     myFolder.systematizationCopyFiles(my_new_folder_path,files,()=>{
         console.log('я всё скопировал');
+        myFolder.deleteFolderAndFiles(my_folder_path,()=>{
+            console.log('я всё удалил');
+        });
     });
 });

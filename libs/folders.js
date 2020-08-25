@@ -99,8 +99,9 @@ module.exports = class {
                 this.ObserverDel.addObserver(curentPath);
 
                 if (el.isDirectory()) {
-                    this.systemDel(curentPath);
                     this.ObserverDel.removeObserver(curentPath);
+                    this.deleteRecursive(curentPath);
+                    this.systemDel(curentPath);
                 } else
                 if (el.isFile()) {
                     fs.unlink(curentPath, (err) => {
@@ -108,7 +109,8 @@ module.exports = class {
 
                         //this.ObserverDel.addObserver(path.join(curentPath, '../')+'unlink');
                         //Рекурсивное удаление https://youtu.be/m-hMYMqnDvo?t=5131
-
+                        
+                        this.deleteRecursive(path.join(curentPath, '../'));
                         this.ObserverDel.removeObserver(curentPath);
                     });
                 } else {
@@ -118,6 +120,36 @@ module.exports = class {
 
             this.ObserverDel.removeObserver(folderPath);
         });
+    }
+
+    deleteRecursive(currentPath) {
+        this.isEmpty(currentPath, (err, status) => {
+            if (err) throw err;
+            
+            if (status) {    
+                console.log(currentPath, this.ObserverDel.observers);
+                console.log('--------------');
+                this.ObserverDel.addObserver(currentPath+'_del');
+                fs.rmdir(currentPath, (err) => {
+                    if (err) throw err;
+                    this.deleteRecursive(path.join(currentPath, '../'));
+                    this.ObserverDel.removeObserver(currentPath+'_del');
+                });
+            }
+        });
+    }
+    
+    isEmpty(src, cb) {
+        this.ObserverDel.addObserver(src+'_doubleReadDir');
+        fs.readdir(src, (err, files) => {
+            this.ObserverDel.removeObserver(src+'_doubleReadDir');
+            if (err) return cb(err, null);
+            if (files.length) {
+                cb(null, false);
+            } else {
+                cb(null, true);
+            }
+        })
     }
 
     deleteFolderAndFiles(folderPath, callback) {
