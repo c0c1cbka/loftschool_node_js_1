@@ -20,25 +20,27 @@ const LIMIT = process.env.nodejs_dz2_limit * 1000;
 const DELAY = process.env.nodejs_dz2_delay * 1000;
 
 //функция вывода времени
-let showTime = (res) => {
+let showTime = () => {
     let datetime = new Date();
     let datetimeUTC = datetime.toUTCString();
-    res.write(`${datetimeUTC}\n`);
+    console.log(`${datetimeUTC}`);
 };
 
 let createAndDestroinInterval = (res) => {
     //выполняем в первый раз функцию
-    showTime(res);
+    showTime();
 
     //Задаем интервал чтобы функция выполнялась раз в DELAY секунд и сохроняем переменную интервала
     let interval = setInterval(() => {
-        showTime(res);
+        showTime();
     }, DELAY);
 
     //Через LIMIT милесикунд удаляем интервал и закрываем соединение
     setTimeout(() => {
         clearInterval(interval);
-        res.write("END\n");
+        let datetime = new Date();
+        let datetimeUTC = datetime.toUTCString();
+        res.write(`${datetimeUTC} - END\n`);
         res.end();
     }, LIMIT);
 }
