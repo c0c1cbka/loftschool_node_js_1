@@ -23,5 +23,5 @@ if (process.argv[3] == undefined) {
 
 myFolder.getFilesInFolder(my_folder_path,(files)=>{
     console.log('я всё прочёл');
-    console.log(files);
+    console.log(files.length);
 });
